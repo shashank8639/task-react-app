@@ -1,0 +1,70 @@
+.auth_wrapper {
+    width: 320px;
+    margin: 30vh auto 0;
+    transform: translateY(-50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .switch_box {
+    display: flex;
+    justify-content: space-between;
+    background: #315e7f;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .switch_box label {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    transition: background 0.3s;
+  }
+  
+  .switch_box label:hover {
+    background: #23da87;
+  }
+  
+  .slider {
+    height: 3px;
+    background: #23da87;
+    transition: transform 0.3s ease;
+    width: 50%;
+  }
+  
+  .form_wrapper {
+    position: relative;
+    height: 260px;
+  }
+  
+  .form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .form button {
+    padding: 10px;
+    background: #315e7f;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .form button:hover {
+    background: #23da87;
+  }
+  

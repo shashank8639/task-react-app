@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#root {
+  text-align: center;
+}
+/* 
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 1s linear;
+  }
+} */
+
+header {
+  background-color: black;
+  width: 100%;
+  height: 160px;
+}
+header h1 {
+  color: white;
+}
+
+/* .loginForm {
+  display: flex;
+  flex-direction: column;
+}
+.loginForm form {
+  display: grid;
+  place-content: center;
+}
+.loginForm form label {
+  position: absolute;
+  top: -99999px;
+}
+.loginForm input {
+  display: block;
+}
+.loginForm input[type='text'],
+.loginForm input[type='password'] {
+  font-size: 20px;
+  padding: 6px 12px;
+  margin-bottom: 8px;
+}
+
+.loginForm form button{
+  background-color: rgb(76, 217, 253);
+  border: none;
+  border-radius: 6px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.register{
+  padding: 6px 15px;
+  margin-top: 10px;
+  background-color: limegreen;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
+.taskList {
+  border: 2px solid black;
+  width: 100%;
+  max-width: 500px;
+  display: grid;
+  place-content: center;
+  margin: 0 auto;
+  box-shadow: 0 0 10px;
+  padding: 2rem;
+}
+.taskList button {
+  max-width: 70%;
+  padding: 6px 12px;
+  margin: 15px auto;
+}
+.taskList ul {
+  list-style-type: none;
+}
+
+.taskList ul li button {
+  margin: 10px 12px;
+  border: none;
+  background-color: lightgrey;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.Nav {
+  background-color: rgb(102, 250, 238);
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.Nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.Nav  .link {
+  text-decoration: none;
+  font-size: 22px;
+  margin: 6px 10px;
+  background-color: rgb(11, 183, 169);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+.Nav .link:hover,
+.Nav .link:focus {
+  background-color: limegreen;
+  padding: 15px 15px;
+} */
+
+.nav-container {
+  background-color: #315e7f;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-links {
+  position: relative;
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  padding-left: 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+.nav-links li:nth-last-child {
+  margin: auto 0;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  padding: 8px 10px;
+  transition: background 0.3s;
+}
+
+.link:hover {
+  background-color: #23da87;
+  border-radius: 4px;
+}
+
+/* .logout {
+  background-color: #23da87;
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #1bbf6e;
+} */
+
+.logout {
+  background-color: #23da87;
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.logout:hover {
+  background-color: #1bbf6e;
+  transform: scale(1.05);
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    margin-top: 10px;
+    background: #315e7f;
+    border-radius: 6px;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+  .logout {
+    top: 12px;
+    right: 15px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
