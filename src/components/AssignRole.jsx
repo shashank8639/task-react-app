@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { assignRoleToUser } from '../service/api';
 import { Link } from 'react-router-dom';
+import Dashboard from "./Dashboard";
 
 const AssignRole = () => {
   const [username, setUsername] = useState('');
@@ -22,6 +23,7 @@ const AssignRole = () => {
 
   return (
     <div className='loginForm'>
+      <Dashboard />
       <Link className='link' to="/dashboard">Dashboard</Link>
       <h2>Assign Role to User</h2>
       <form onSubmit={handleSubmit}>

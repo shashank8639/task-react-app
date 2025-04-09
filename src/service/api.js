@@ -103,7 +103,7 @@ export const getPendingTasks = async () => {
 };
 
 export const getCompletedTasks = async () => {
-  const res = await axios.get(`/tasks/completed`);
+  const res = await api.get(`/tasks/completed`);
   return res.data;
 };
 export const updateTask = async (id, task) => {

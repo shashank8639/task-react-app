@@ -62,6 +62,7 @@
 .task-status {
   font-weight: bold;
   color: #666;
+  font-size: 28px;
 }
 
 .task-actions button {
@@ -124,6 +125,64 @@
 }
 
 /* Highlight Assigned To */
-.task-list p strong {
-  color: #feca57;
+.field {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
 }
+.ans {
+  font-size: 20px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+.btn-confirm {
+  background-color: #ffa500;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
+}
+
+.btn-confirm:hover {
+  background-color: #e69500;
+}
+.small-slider {
+  width: 100px;
+  height: 4px;
+  accent-color: green;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.slider-label {
+  font-size: 0.9rem;
+}
+
+.completed-text {
+  color: green;
+  font-weight: bold;
+}
+
+.task-actions {
+  margin-top: 10px;
+}
+
+.task-item {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.task-item.confirmed {
+  background-color: #d4edda;
+}
+
+.task-item.completed {
+  background-color: #fff3cd;
+}
+
+.task-item.pending {
+  background-color: #f8d7da;
+}
+

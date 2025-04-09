@@ -10,33 +10,58 @@ import {
 } from "../service/api";
 import TaskItem from "./TaskItem";
 import "./TaskList.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TaskList = ({ checkAdmin }) => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+
   const navigate = useNavigate();
 
-  const fetchTasks = async (filter = "all") => {
+  const fetchTasks = async (filterType = "all") => {
     try {
       setLoading(true);
       setError(null);
+      setFilter(filterType);
       let data;
+
       if (checkAdmin) {
-        if (filter === "pending") {
-          data = await getPendingTasks();
-        } else if (filter === "completed") {
-          data = await getCompletedTasks();
-        } else {
-          data = await getAllTasks();
+        switch (filterType) {
+          case "pending":
+            data = await getPendingTasks();
+            break;
+          case "completed":
+            data = await getCompletedTasks();
+            break;
+          case "confirmed":
+            data = await getAllTasks(); // fetch all and filter confirmed ones
+            break;
+          default:
+            data = await getAllTasks();
         }
       } else {
         data = await getUserTasks();
       }
-      setTasks(data);
+
+      let formattedTasks = Array.isArray(data)
+        ? data.map((task) => ({
+            ...task,
+            isCompleted: Boolean(task.completed),
+            isConfirmed: Boolean(task.confirmed),
+          }))
+        : [];
+
+      if (filterType === "confirmed") {
+        formattedTasks = formattedTasks.filter((task) => task.isConfirmed);
+      }
+
+      setTasks(formattedTasks);
     } catch (error) {
-      console.error(error);
       setError("Failed to load tasks.");
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -49,27 +74,39 @@ const TaskList = ({ checkAdmin }) => {
   const handleDelete = async (id) => {
     try {
       await deleteTaskById(id);
-      setTasks(tasks.filter((task) => task.id !== id));
+      setTasks((prev) => prev.filter((task) => task.id !== id));
     } catch (error) {
       console.error("Failed to delete task:", error);
     }
   };
 
-  const handleUpdate = async (id, completed) => {
+  const handleUpdate = async (id, action) => {
     try {
-      await updateTask(id, { isCompleted: completed });
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === id ? { ...task, isCompleted: completed } : task
-        )
+      let updatePayload = {};
+
+      if (action === "complete") {
+        updatePayload = { completed: true };
+      } else if (action === "confirm") {
+        updatePayload = { confirmed: true };
+      }
+
+      await updateTask(id, updatePayload);
+      toast.success(
+        action === "confirm"
+          ? "✅ Task confirmed by Admin!"
+          : "✅ Task marked as completed!"
       );
+      // re-fetch after update to reflect latest state
+      fetchTasks(filter);
     } catch (error) {
       console.error("Failed to update task:", error);
+      toast.error("❌ Failed to update task.");
     }
   };
 
   return (
     <div className="task-list-container">
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className="task-header-bar">
         <h2>{checkAdmin ? "All Tasks (Admin)" : "Your Tasks"}</h2>
         {checkAdmin && (
@@ -84,8 +121,36 @@ const TaskList = ({ checkAdmin }) => {
 
       {checkAdmin && (
         <div className="filter-buttons">
-          <button className="btn pulse" onClick={() => fetchTasks("pending")}>Show Pending Tasks</button>
-          <button className="btn pulse" onClick={() => fetchTasks("completed")}>Show Completed Tasks</button>
+          {filter !== "all" && (
+            <button className="btn pulse" onClick={() => fetchTasks("all")}>
+              🔙 Back to All Tasks
+            </button>
+          )}
+          {tasks.some((task) => !task.isConfirmed && task.isCompleted) &&
+            filter !== "pending" && (
+              <button
+                className="btn pulse"
+                onClick={() => fetchTasks("pending")}
+              >
+                Show Pending Tasks
+              </button>
+            )}
+          {filter !== "completed" && (
+            <button
+              className="btn pulse"
+              onClick={() => fetchTasks("completed")}
+            >
+              Show Completed Tasks
+            </button>
+          )}
+          {filter !== "confirmed" && (
+            <button
+              className="btn pulse"
+              onClick={() => fetchTasks("confirmed")}
+            >
+              ✅ Show Confirmed Tasks
+            </button>
+          )}
         </div>
       )}
 
