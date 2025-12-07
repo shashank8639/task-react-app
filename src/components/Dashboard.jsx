@@ -12,7 +12,11 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         console.log('dashboard loding');
-        setCheckAdmin(getUserRole())
+        const profile = await getUserProfile();
+        console.log('profile: ', profile);
+        console.log('username: ', profile.username);
+        const roleNames = profile.roles.map(r => r.roleName);
+        setCheckAdmin(roleNames.includes("ROLE_ADMIN"));
         const result = checkAdmin ? await getAllTasks() : await getUserTasks();
         setData(result);
         console.log('From Dashboard loading : ', checkAdmin);
