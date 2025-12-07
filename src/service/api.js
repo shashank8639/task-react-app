@@ -1,8 +1,9 @@
+
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'https://backend-task-app-ckww.onrender.com/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -67,6 +68,10 @@ export const getUserRole = () => {
 export const getAllRoles = async () => {
   const response = await api.get(`/roles/all`);
   return response.data;
+};
+export const getUserProfile = async () => {
+  const res = await api.get("/user/me"); // Adjust endpoint if needed
+  return res.data;
 };
 
 export const addRole = async (role) => {
